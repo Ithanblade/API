@@ -336,13 +336,108 @@ console.log(allServices)
 //Programacion Declarativa
 // REACT
 
+//PROGRAMACION ASINCRONA
+
+// - CALLBACK
+const getUserBDD = ()=>{console.log({id:123,name:"Pancho",rol:"Admin"})}
+setTimeout(getUserBDD,4000)
+
+//CALLBACK - HELL
+
+//PROMESAS
+const conexionBDDExterna = (dataConnection)=>{
+    return new Promise((resolve,reject)=>{ //argumentos resolve(ejecutar exitosamente) y reject(si presenta un error)
+        setTimeout(() => {
+            dataConnection ? resolve("Connection-OK"):reject("Connection BAD")
+        }, 3000);
+    })
+}
+
+//Then - Catch
+conexionBDDExterna(false)
+    .then((response)=>{console.log(response)})
+    .catch((error)=>{console.log(error)})
 
 
+//Async - Await
+const verifyConnection = async()=>{
+    try {
+        console.log(await conexionBDDExterna(true))
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+verifyConnection()
+
+//API Then-Catch
+fetch("https://dog.ceo/api/breeds/image/random") //funcion Fetch(ya es una promesa)
+    .then((request)=>(request.json()))  //.json es otra promesa, por eso ocupa otro .then
+        .then((data)=>{console.log(data)})
+    .catch((error)=>{console.log(error)})   //Captura todos los errores
 
 
+//API ASYNG-AWAIT
+const getDog = async() => {
+    try{
+    let Dog = await fetch("https://dog.ceo/api/breeds/image/random")
+    let data = await Dog.json()
+    console.log(data)
+    }
+    catch (error){
+        console.log(error)
+    }
+}
+
+getDog()
 
 
+//API
+//api.giphy.com/v1/stickers/trending
+//Token
+//lerx9FDWD5PH78M207Cj95ac4KTt8G3v
 
 
+const token = 'lerx9FDWD5PH78M207Cj95ac4KTt8G3v'
+const url = "https://api.giphy.com/v1/stickers/trending";
+
+
+const getGif = async() => {
+    try{
+    let Gif = await fetch(`${url}?api_key=${token}`)
+                    //fetch(`https://api.giphy.com/v1/stickers/trending?api_key=lerx9FDWD5PH78M207Cj95ac4KTt8G3v`)
+    let data = await Gif.json()
+    console.log(data)
+    }
+    catch (error){
+        console.log(error)
+    }
+}
+
+getGif()
+
+
+//ADVANCE
+
+//LOCAL STORAGE
+
+//MODULES
+//COMMONJS = require
+//ES Modules = import o from
+
+//---------------------------------////---------------------------------------///-------------------------------------//---------------------------------------------------//----------
+
+
+//BACKEND DEVELOPERS
+
+//STAGE 1 = Fundamentos agnosticos
+//LIBRERÍA = Solventa una única cosa
+//FRAMEWORK = Ayuda a resolver un problema mas complejo(o varios)
+
+//STAGE 2 = Proyecto 100% Backend 
+
+//STAGE 3 = Proyecto FullStack
+
+//10 Semanas
 
 
